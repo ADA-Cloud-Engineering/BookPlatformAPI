@@ -38,6 +38,10 @@ const bookSchema = new Schema({
         type: String, 
         required: true
     },
+    imageUrl: {
+        type: String, 
+        required: true
+    },
     downloadurl:{
         type: String, 
         required: true

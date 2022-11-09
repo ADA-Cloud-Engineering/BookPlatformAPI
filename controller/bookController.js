@@ -6,9 +6,9 @@ const cloudinary = require("../utils/Cloudinary");
 const upload = async (req, res) =>{
     try{
         const result = await cloudinary.uploader.upload(req.file.path);
-        console.log(result);
         let book = new Book({
             title: req.body.title,
+            imageUrl : req.body.imageUrl,
             author: req.body.author,
             referencenumber: req.body.referencenumber,
             format: req.body.format,
@@ -30,4 +30,12 @@ const upload = async (req, res) =>{
     }
 }
 
-module.exports = {upload};
+const list  =  async (req, res) =>{
+    const books = await Book.find();
+
+    res.status(200).json({'message': 'Fetched books successfully', data : [
+        ...books
+    ]});
+}
+
+module.exports = {upload, list};

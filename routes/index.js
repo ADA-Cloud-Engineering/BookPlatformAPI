@@ -8,7 +8,7 @@ const upload = require("../utils/Multer");
 /* GET home page. */
 router.post('/register', userController.handleNewUser);
 router.post('/login', userController.handleLogin);
-router.get('/list', verifyJWT, bookController.list);
+router.get('/list', bookController.list);
 router.post('/upload', verifyJWT, upload.single('file'), bookController.upload);
 
 module.exports = router;

@@ -44,6 +44,7 @@ const handleLogin = async (req, res) =>{
       
         const user = await User.findOne({emailaddress: email})
 
+        console.log(user);
 
         if(!user){
             return  res.status(400).json({'error': `Invalid credentials`});

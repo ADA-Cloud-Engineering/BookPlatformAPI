@@ -7,10 +7,8 @@ const cloudinary = require("../utils/Cloudinary");
 
 const upload = async (req, res) =>{
     try{
-        console.log(req.user._doc._id);
-        console.log(req.body);
         const result = await cloudinary.uploader.upload(req.file.path);
-        let book = new Book({
+        const book = await Book.create({
             title: req.body.title,
             imageUrl : req.body.imageUrl,
             author: req.body.author,
@@ -22,10 +20,9 @@ const upload = async (req, res) =>{
             publisher: req.body.publisher,
             weight: req.body.weight,
             downloadurl: result.secure_url,
-            userId : req.user._doc._id,
+            user : req.user._doc._id,
             category : req.body.category 
           });
-
         res.status(201).json({'message': 'Book uploaded successfully', data : {
             ...book
         }});

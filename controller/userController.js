@@ -42,7 +42,7 @@ const handleLogin = async (req, res) =>{
        
         //password encryption
       
-        const user = await User.findOne({email})
+        const user = await User.findOne({emailaddress: email})
 
 
         if(!user){

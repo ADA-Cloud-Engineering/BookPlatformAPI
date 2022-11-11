@@ -3,7 +3,7 @@ const path = require("path");
 
 // Multer config
 module.exports = multer({
-  storage: multer.diskStorage({}),
+  storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
     let ext = path.extname(file.originalname);  
     if (ext !== ".pdf" && ext !== ".mp3") {

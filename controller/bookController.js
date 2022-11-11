@@ -1,14 +1,7 @@
 const bcrypt = require('bcrypt');
 const Book = require('../models/Book');
-const cloudinary = require("../utils/Cloudinary");
-const path = require("path");
-const DatauriParser = require('datauri/parser');
-const parser = new DatauriParser();
-
 const upload = async (req, res) =>{
     try{
-        const dUri = parser.format(path.extname(req.file.originalname).toString(), req.file.buffer);
-        const result = await cloudinary.uploader.upload(dUri.content);
         const book = await Book.create({
             title: req.body.title,
             imageUrl : req.body.imageUrl,
@@ -20,7 +13,7 @@ const upload = async (req, res) =>{
             releasedate: req.body.releasedate,
             publisher: req.body.publisher,
             weight: req.body.weight,
-            downloadurl: result.secure_url,
+            downloadurl: req.fileUrl,
             user : req.user._doc._id,
             category : req.body.category 
           });

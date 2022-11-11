@@ -8,6 +8,7 @@ const cloudinary = require("../utils/Cloudinary");
 const upload = async (req, res) =>{
     try{
         console.log(req.user._doc._id);
+        console.log(req.body);
         const result = await cloudinary.uploader.upload(req.file.path);
         let book = new Book({
             title: req.body.title,

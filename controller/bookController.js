@@ -13,13 +13,11 @@ const upload = async (req, res) =>{
             releasedate: req.body.releasedate,
             publisher: req.body.publisher,
             weight: req.body.weight,
-            downloadurl: req.fileUrl,
+            downloadurl: req.body.fileUrl,
             user : req.user._doc._id,
             category : req.body.category 
           });
-        res.status(201).json({'message': 'Book uploaded successfully', data : {
-            ...book
-        }});
+        res.status(201).json({'message': 'Book uploaded successfully', data : book});
 
     }
     catch(err){
@@ -30,10 +28,7 @@ const upload = async (req, res) =>{
 const list  =  async (req, res) =>{
    const param = req.query;
     const books = await Book.find({...param});
-
-    res.status(200).json({'message': 'Fetched books successfully', data : [
-        ...books
-    ]});
+    res.status(200).json({'message': 'Fetched books successfully', data : books});
 }
 
 module.exports = {upload, list};
